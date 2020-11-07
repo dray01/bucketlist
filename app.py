@@ -1,6 +1,6 @@
 from flask import Flask, render_template, json, request,redirect,session,jsonify, url_for
-from flask.ext.mysql import MySQL
-from werkzeug import generate_password_hash, check_password_hash
+from flaskext.mysql import MySQL
+from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.wsgi import LimitedStream
 import uuid
 import os
