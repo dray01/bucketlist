@@ -50,9 +50,9 @@ def main():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-    file = request.files['file']
+        file = request.files['file']
         extension = os.path.splitext(file.filename)[1]
-    	f_name = str(uuid.uuid4()) + extension
+        f_name = str(uuid.uuid4()) + extension
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
         return json.dumps({'filename':f_name})
 
@@ -83,12 +83,9 @@ def addUpdateLike():
                 conn.commit()
                 cursor.close()
                 conn.close()
-
-               
                 conn = mysql.connect()
-            	cursor = conn.cursor()
-            	cursor.callproc('sp_getLikeStatus',(_wishId,_user))
-                
+                cursor = conn.cursor()
+                cursor.callproc('sp_getLikeStatus',(_wishId,_user))
                 result = cursor.fetchall()		
 
                 return json.dumps({'status':'OK','total':result[0][0],'likeStatus':result[0][1]})
@@ -397,4 +394,4 @@ def signUp():
         conn.close()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0"port=5002)
+    app.run(host="0.0.0.0",port=5002)
