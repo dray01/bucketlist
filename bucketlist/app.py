@@ -52,13 +52,10 @@ def upload():
     if request.method == 'POST':
         file = request.files['file']
         extension = os.path.splitext(file.filename)[1]
-<<<<<<< HEAD
     	f_name = str(uuid.uuid4()) + extension
     	file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
-=======
         f_name = str(uuid.uuid4()) + extension
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
->>>>>>> fix git
         return json.dumps({'filename':f_name})
 
 @app.route('/showSignUp')
@@ -88,18 +85,12 @@ def addUpdateLike():
                 conn.commit()
                 cursor.close()
                 conn.close()
-<<<<<<< HEAD
-
-               
                 conn = mysql.connect()
             	cursor = conn.cursor()
             	cursor.callproc('sp_getLikeStatus',(_wishId,_user))
-                
-=======
                 conn = mysql.connect()
                 cursor = conn.cursor()
                 cursor.callproc('sp_getLikeStatus',(_wishId,_user))
->>>>>>> fix git
                 result = cursor.fetchall()		
 
                 return json.dumps({'status':'OK','total':result[0][0],'likeStatus':result[0][1]})
