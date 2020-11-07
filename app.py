@@ -10,10 +10,10 @@ app = Flask(__name__)
 app.secret_key = 'why would I tell you my secret key?'
 
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'jay'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'jay'
-app.config['MYSQL_DATABASE_DB'] = 'BucketList'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'bucket' #database user
+app.config['MYSQL_DATABASE_PASSWORD'] = 'GCP1!' #root Password
+app.config['MYSQL_DATABASE_DB'] = 'BucketList' #database Name
+app.config['MYSQL_DATABASE_HOST'] = 'bd-demo-db' #database host
 mysql.init_app(app)
 
 # Default setting
@@ -50,7 +50,7 @@ def main():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-    	file = request.files['file']
+        file = request.files['file']
         extension = os.path.splitext(file.filename)[1]
     	f_name = str(uuid.uuid4()) + extension
     	file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
@@ -397,4 +397,4 @@ def signUp():
         conn.close()
 
 if __name__ == "__main__":
-    app.run(port=5002)
+    app.run(host="0.0.0.0"port=5002)
